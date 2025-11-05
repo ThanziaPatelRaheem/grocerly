@@ -1,0 +1,239 @@
+:root {
+  --font-body-color: #8b8c89;
+  --font-heading-color: #0d1b2a;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial,
+    sans-serif;
+  --font-head: "Outfit", "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    Arial, sans-serif;
+  --text-color: #495057;
+  --footer-bg: #d9dada96;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.footer-section {
+  grid-column: 2/-2;
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--footer-bg);
+  justify-content: center;
+
+  padding: 0.6em 1em;
+}
+.footer-section:last-child {
+  padding-bottom: 0;
+}
+.footer-logo,
+.footer-quick-links,
+.footer-social-icons {
+  text-align: center;
+}
+.footer-logo {
+  grid-column: 2/-2;
+}
+.footer-quick-links {
+  grid-column: 2/-2;
+}
+.footer-brand-logo {
+  width: auto;
+  height: 35px;
+  display: block;
+  margin: 0 auto;
+}
+.brand-tagline {
+  font-size: 1rem;
+  color: var(--font-body-color);
+  /* font-family: var(--font-body); */
+  font-weight: 400;
+  line-height: 1.4;
+}
+.column-title,
+.social-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0;
+}
+.quick-links-container {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  gap: 0.6em;
+  padding: 0;
+  line-height: 1;
+}
+
+.quick-links-items {
+  text-decoration: none;
+  font-size: 1rem;
+  color: var(--font-body-color);
+}
+.quick-links-items:hover {
+  color: #7cb141;
+}
+.active-quick-link-items {
+  text-decoration: none;
+  color: #009444;
+}
+.socials-container {
+  display: flex;
+  gap: 1em;
+  list-style: none;
+  justify-content: center;
+  padding: 0;
+  align-items: center;
+}
+.socials-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.socials-icon {
+  text-decoration: none;
+  color: var(--font-body-color);
+  font-size: 1.3rem;
+}
+.socials-icon-youtube {
+  text-decoration: none;
+  color: var(--font-body-color);
+  font-size: 1.4rem;
+}
+.socials-icon:hover,
+.socials-icon-youtube:hover {
+  color: #7cb141;
+}
+
+.copyrights-tagline {
+  text-align: center;
+  font-size: 0.701rem;
+  color: var(--font-body-color);
+}
+@media (min-width: 768px) {
+  .footer-section {
+    grid-column: 2/-2;
+    /* grid-column: 1/-1; */
+    display: grid;
+    grid-template-columns:
+      minmax(1em, 1fr) repeat(5, minmax(0px, 250px))
+      minmax(1em, 1fr);
+    gap: 1rem;
+
+    justify-content: center;
+  }
+
+  .footer-logo {
+    grid-column: 2 / span 2;
+  }
+  .footer-quick-links {
+    grid-column: 4 / span 2;
+    justify-self: center;
+  }
+
+  .footer-social-icons {
+    grid-column: 6 / span 2;
+    justify-self: end;
+  }
+  .copyrights-container {
+    grid-column: 2/-2;
+  }
+  .footer-logo,
+  .footer-quick-links,
+  .footer-social-icons {
+    text-align: left;
+  }
+  .column-title,
+  .social-title {
+    font-size: 1.175rem;
+    margin-top: 0;
+  }
+  .footer-brand-logo {
+    width: auto;
+    height: 42px;
+    display: block;
+    margin: 0;
+  }
+  .social-title {
+    margin-bottom: 0;
+  }
+  .brand-tagline,
+  .quick-links-items {
+    font-size: 1.105rem;
+  }
+  .footer-social-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .footer-divider {
+    border: none;
+    border-top: 0.2px solid #adb5bd;
+    width: 100%;
+  }
+  .copyrights-tagline {
+    font-size: 0.995rem;
+  }
+  .copyrights-container {
+    padding-top: 2em;
+  }
+}
+@media (min-width: 1440px) {
+  .footer-section {
+    grid-column: 2/-2;
+    display: grid;
+    grid-template-columns:
+      minmax(1em, 1fr) repeat(6, minmax(0px, 250px))
+      minmax(1em, 1fr);
+    gap: 1rem;
+    justify-content: center;
+  }
+  .footer-logo {
+    grid-column: 2 / span 2;
+  }
+  .footer-quick-links {
+    grid-column: 4 / span 2;
+    justify-self: center;
+  }
+
+  .footer-social-icons {
+    grid-column: 6 / span 2;
+    justify-self: end;
+  }
+  .footer-brand-logo {
+    width: auto;
+    height: 36px;
+    display: block;
+    margin: 0;
+  }
+  .brand-tagline,
+  .quick-links-items {
+    font-size: 1rem;
+  }
+  .footer-logo {
+    line-height: 1.2;
+  }
+  .footer-quick-links {
+    line-height: 1;
+  }
+  .column-title,
+  .social-title {
+    font-size: 1rem;
+    margin: 0;
+  }
+  .socials-icon {
+    font-size: 1.9rem;
+  }
+  .socials-icon-youtube {
+    font-size: 2.2rem;
+  }
+  .copyrights-tagline {
+    font-size: 0.75rem;
+  }
+}

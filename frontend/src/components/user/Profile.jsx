@@ -1,0 +1,32 @@
+import React from "react";
+import UserLayout from "../Layout/UserLayout";
+import DefaultPicture from "../../assets/images/account-icon.png";
+import { useSelector } from "react-redux";
+
+const Profile = () => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+  return (
+    <>
+      <aside className="profile-section">
+        <div className="profile-image-container">
+          <img
+            src={user?.avatar ? user?.avatar : DefaultPicture}
+            alt={user?.name}
+            className="profile-picture"
+          />
+        </div>
+        <div className="profile-detail-container">
+          <h4 className="profile-name">Name</h4>
+          <p>{user?.name}</p>
+          <h4>Email</h4>
+          <p>{user?.email}</p>
+          <h4>Joined on</h4>
+          <p>{user?.createdAt.substring(0, 10)}</p>
+        </div>
+      </aside>
+    </>
+  );
+};
+
+export default Profile;
