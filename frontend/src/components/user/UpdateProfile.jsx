@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useUpdateProfileMutation } from "../../redux/api/userApi";
 import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { replace, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
 

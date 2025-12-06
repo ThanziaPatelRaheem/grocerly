@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Apple from "../../public/images/apples.png";
-import Apple1 from "../../public/images/apples-1.png";
-import Apple2 from "../../public/images/apples-2.png";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 import { useParams, Link } from "react-router-dom";
 import Review from "./Review";
@@ -12,27 +9,31 @@ import Loader from "../components/Layout/Loader";
 import { RatingView } from "react-simple-star-rating";
 import { useDispatch } from "react-redux";
 import { setCartItem } from "../redux/features/cartSlice";
+import MetaData from "../components/Layout/MetaData";
+import DefaultPicture from "../assets/images/default-image.png";
+import NotFound from "../components/Layout/NotFound";
 
 const ProductDetails = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [activeTab, setActiveTab] = useState("reviews");
-  const [activeImg, setActiveImg] = useState("");
+  const [activeImg, setActiveImg] = useState(DefaultPicture);
 
-  const { data, isLoading, isError, error } = useGetProductDetailsQuery(id);
+  const { data, isLoading, isError, error, refetch } =
+    useGetProductDetailsQuery(id);
   const product = data?.product;
-  console.log(product);
-  console.log(data);
 
   const handleTabClick = (tabName) => {
     setActiveTab(tabName);
   };
 
   useEffect(() => {
-    setActiveImg(
-      product?.images[0] ? product?.images?.[0] : "/images/default-image.png"
-    );
+    if (product?.images?.length > 0 && product.images[0]?.url) {
+      setActiveImg(product.images[0].url);
+    } else {
+      setActiveImg(DefaultPicture);
+    }
   }, [product]);
 
   useEffect(() => {
@@ -52,11 +53,12 @@ const ProductDetails = () => {
   };
 
   const setItemToCart = () => {
+    const imageUrl = product?.images?.[0]?.url || DefaultPicture;
     const cartItem = {
-      product: product?.id,
+      product: product?._id,
       name: product?.name,
       price: product?.price,
-      image: product?.images[0],
+      image: imageUrl,
       stock: product?.stock,
       quantity,
     };
@@ -66,9 +68,13 @@ const ProductDetails = () => {
   };
 
   if (isLoading) return <Loader />;
+  if (error && error?.status == 404) {
+    return <NotFound />;
+  }
 
   return (
     <>
+      <MetaData title={"Product Details"} />
       <section className="product-details-container main-grid">
         <Link to=".." relative="path" className="back-btn">
           <MdKeyboardDoubleArrowLeft className="back-arrow-btn" />
@@ -83,35 +89,39 @@ const ProductDetails = () => {
             />
           </div>
           <div className="thumbnail-gallery">
-            {product?.images?.map((img, index) => (
-              <img
-                key={index}
-                src={img}
-                className={`thumb-product-img ${
-                  img === activeImg ? "add-border" : ""
-                }`}
-                alt={img}
-                onClick={(e) => setActiveImg(img)}
-              />
-            ))}
+            {product?.images?.length > 0 &&
+              product?.images?.map((img, index) => (
+                <img
+                  key={index}
+                  src={img.url}
+                  className={`thumb-product-img ${
+                    img === activeImg ? "add-border" : ""
+                  }`}
+                  alt={img}
+                  onClick={() => setActiveImg(img.url)}
+                />
+              ))}
           </div>
         </div>
         <div className="product-information">
-          <h1 className="product-detail-title">{product.name}</h1>
-          <p className="product-detail-id">{product.id}</p>
+          <h1 className="product-detail-title">{product?.name}</h1>
+          <p className="product-detail-id">{product?._id}</p>
           <div className="rating-reviews">
             <RatingView
-              ratingValue={product.rating}
+              ratingValue={product?.ratings}
               size={20}
               fillColor="#ffd700"
               emptyColor="#ced4da"
               className="product-rating-comp"
             />
-            <p className="review-pro">({product.reviews} Reviews)</p>
+            <p className="review-pro">
+              ({product?.numOfReviews}{" "}
+              {product?.numOfReviews > 1 ? "Reviews" : "Review"})
+            </p>
           </div>
 
           <div className="product-detail-section">
-            <p className="price">${product.price}</p>
+            <p className="price">${product?.price}</p>
             <div className="quantity-container">
               <button
                 className="quantity-btn minus"
@@ -148,7 +158,7 @@ const ProductDetails = () => {
 
             <div className="product-description-container">
               <h2 className="product-des-title">Description</h2>
-              <p className="product-des">{product.description}</p>
+              <p className="product-des">{product?.shortDescription}</p>
             </div>
             <div className="add-to-cart-product">
               <button
@@ -182,8 +192,16 @@ const ProductDetails = () => {
             </button>
           </div>
           <div className="tab-content-area">
-            {activeTab === "reviews" && <Review />}
-            {activeTab === "description" && <ProductDescription />}
+            {activeTab === "reviews" && (
+              <Review
+                productId={product?._id}
+                product={product}
+                refetchProduct={refetch}
+              />
+            )}
+            {activeTab === "description" && (
+              <ProductDescription product={product} />
+            )}
           </div>
         </div>
       </section>

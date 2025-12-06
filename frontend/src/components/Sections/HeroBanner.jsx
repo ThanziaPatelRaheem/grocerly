@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router";
-import { BiRadioCircleMarked } from "react-icons/bi";
 
 const HeroBanner = () => {
   return (
@@ -8,7 +7,8 @@ const HeroBanner = () => {
       <section className="hero-banner main-grid">
         <div className="hero-content">
           <h1 className="hero-title">
-            Get freshness delivered <br /> on your doorstep
+            Get freshness <span>delivered</span> <br />
+            on your doorstep
           </h1>
           <p className="hero-info">Organic and fresh food</p>
 

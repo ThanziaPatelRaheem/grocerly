@@ -11,10 +11,9 @@ const AppLayout = () => {
         position="top-center"
         toastOptions={{
           style: {
-            // border: "1px solid grey",
             color: "#495057",
             backgroundColor: "#fff",
-            zIndex: 9999, // You might want this too
+            zIndex: 9999,
           },
         }}
       />

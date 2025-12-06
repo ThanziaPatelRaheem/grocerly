@@ -5,7 +5,7 @@ import { FaSquareInstagram } from "react-icons/fa6";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import { IoLogoYoutube } from "react-icons/io5";
 import "../../css/footer.css";
-import footerLogo from "../../assets/images/Grologo.png";
+import footerLogo from "../../assets/images/Grocerly.png";
 
 const Footer = () => {
   return (
@@ -27,7 +27,7 @@ const Footer = () => {
           <ul className="quick-links-container">
             <li className="quick-links-list">
               <NavLink
-                to="/about"
+                to="about-us"
                 className={({ isActive }) =>
                   isActive ? "active-quick-link-items" : "quick-links-items"
                 }
@@ -47,7 +47,7 @@ const Footer = () => {
             </li>
             <li>
               <NavLink
-                to="/shipping"
+                to="shipping-info"
                 className={({ isActive }) =>
                   isActive ? "active-quick-link-items" : "quick-links-items"
                 }
@@ -57,12 +57,12 @@ const Footer = () => {
             </li>
             <li>
               <NavLink
-                to="/policy"
+                to="terms-conditions"
                 className={({ isActive }) =>
                   isActive ? "active-quick-link-items" : "quick-links-items"
                 }
               >
-                Privacy Policy
+                Terms & Conditions
               </NavLink>
             </li>
           </ul>
@@ -97,7 +97,7 @@ const Footer = () => {
       </div>
 
       <div className="copyrights-container">
-        <hr class="footer-divider" />
+        <hr className="footer-divider" />
         <p className="copyrights-tagline">
           &copy; {new Date().getFullYear()} Grocerly. All rights reserved.
         </p>

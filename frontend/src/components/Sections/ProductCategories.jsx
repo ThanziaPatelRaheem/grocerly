@@ -19,33 +19,32 @@ import useHorizontalScroll from "../../hooks/useHorizontalScroll";
 const ProductCategories = () => {
   const { scrollRef, scroll } = useHorizontalScroll(150);
   const categories = [
-    { name: "Fruits", image: fruits },
-    { name: "Vegetables", image: vegetables },
-    { name: "Dairy & Eggs", image: dairy },
-    { name: "Meat & Poultry", image: poultry },
-    { name: "Bakery & Bread", image: bread },
-    { name: "Frozen Foods", image: frozen },
-    { name: "Snacks & Candy", image: snacks },
-    { name: "Household Supplies", image: household },
-    { name: "Mother & Baby", image: baby },
-    { name: "Beauty & Personal Care", image: beauty },
-    { name: "Beverages", image: beverages },
-    { name: "Cooking & Baking Needs", image: baking },
+    { name: "Fruits", image: fruits, value: "Fruits" },
+    { name: "Vegetables", image: vegetables, value: "Vegetables" },
+    { name: "Dairy & Eggs", image: dairy, value: "Dairy & Eggs" },
+    { name: "Meat & Poultry", image: poultry, value: "Meat & Poultry" },
+    { name: "Bakery & Bread", image: bread, value: "Bakery & Bread" },
+    { name: "Frozen Foods", image: frozen, value: "Frozen Foods" },
+    { name: "Snacks & Candy", image: snacks, value: "Snacks & Candy" },
+    {
+      name: "Household Supplies",
+      image: household,
+      value: "Household Supplies",
+    },
+    { name: "Mother & Baby", image: baby, value: "Mother & Baby" },
+    {
+      name: "Beauty & Personal Care",
+      image: beauty,
+      value: "Beauty & Personal Care",
+    },
+    { name: "Beverages", image: beverages, value: "Beverages" },
+    {
+      name: "Cooking & Baking Needs",
+      image: baking,
+      value: "Cooking & Baking Needs",
+    },
   ];
-  // const scrollContainerRef = useRef(null);
 
-  // const scrollDistance = 150;
-  // const scroll = (direction) => {
-  //   const container = scrollContainerRef.current;
-
-  //   if (container) {
-  //     if (direction === "left") {
-  //       container.scrollLeft -= scrollDistance;
-  //     } else {
-  //       container.scrollLeft += scrollDistance;
-  //     }
-  //   }
-  // };
   return (
     <>
       <section className="categories-section main-grid">
@@ -60,12 +59,16 @@ const ProductCategories = () => {
 
         <div className="category-list-container" ref={scrollRef}>
           {categories.map((cat, index) => (
-            <Link key={index} className="category-item">
+            <Link
+              to={`/products?category=${encodeURIComponent(cat.value)}`}
+              key={index}
+              className="category-item"
+            >
               <div className="category-icon-wrapper">
                 <img
                   src={cat.image}
                   className="category-image"
-                  alt="catergory-image"
+                  alt={cat.name}
                 />
               </div>
               <p className="category-name">{cat.name}</p>

@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Apples from "../../../public/images/apples.png";
 import MetaData from "../Layout/MetaData";
 import { useSelector } from "react-redux";
 import { calculateOrderCost } from "../../helpers/helper";

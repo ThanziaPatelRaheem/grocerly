@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import UserRoutes from "./components/routes/userRoutes";
 import AdminRoutes from "./components/routes/adminRoutes";
 import AppLayout from "./components/Layout/AppLayout";
+import NotFound from "./components/Layout/NotFound";
 
 function App() {
   const userRoutes = UserRoutes();
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" element={<AppLayout />}>
             {userRoutes}
             {adminRoutes}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

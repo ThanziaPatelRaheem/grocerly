@@ -15,12 +15,11 @@ export const cartSlice = createSlice({
   name: "cartSlice",
   reducers: {
     setCartItem: (state, action) => {
-      const newItem = action.payload; // { product, name, price, image, stock?, quantity? }
+      const newItem = action.payload;
       const existing = state.cartItems.find(
         (i) => i.product === newItem.product
       );
 
-      // how many to add now (default 1)
       let addBy = parseInt(newItem.quantity, 10);
       if (!addBy || addBy < 1) addBy = 1;
 
@@ -39,9 +38,8 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // +1 (stop at stock if known)
     increaseItemQuantity: (state, action) => {
-      const id = action.payload; // product id
+      const id = action.payload;
       const item = state.cartItems.find((i) => i.product === id);
       if (!item) return;
 
@@ -51,7 +49,6 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // -1 (never below 1)
     decreaseItemQuantity: (state, action) => {
       const id = action.payload;
       const item = state.cartItems.find((i) => i.product === id);
@@ -63,13 +60,16 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // remove item entirely
     removeItemFromCart: (state, action) => {
       const id = action.payload;
       state.cartItems = state.cartItems.filter((i) => i.product !== id);
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
+    clearCart: (state, action) => {
+      localStorage.removeItem("cartItems");
+      state.cartItems = [];
+    },
     saveShippingInfo: (state, action) => {
       state.shippingInfo = action.payload;
       localStorage.setItem("shippingInfo", JSON.stringify(state.shippingInfo));
@@ -85,4 +85,5 @@ export const {
   decreaseItemQuantity,
   removeItemFromCart,
   saveShippingInfo,
+  clearCart,
 } = cartSlice.actions;

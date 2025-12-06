@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import MetaData from "../../components/Layout/MetaData";
-import Apples from "../../../public/images/apples.png";
 import { RiDeleteBin7Fill } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
@@ -15,7 +14,6 @@ import EmptyCart from "./EmptyCart";
 const Cart = () => {
   const dispatch = useDispatch();
   const { cartItems } = useSelector((state) => state.cart);
-  console.log("cartItems", cartItems);
   const count = cartItems?.length ?? 0;
 
   return (
@@ -115,23 +113,6 @@ const Cart = () => {
                   </article>
                 ))}
               </div>
-
-              {/* <article className="order-summary-section">
-                <div className="summary-wrapper">
-                  <div className="subtotal-container">
-                    <p>Subtotal</p>
-                    <p>quantity</p>
-                  </div>
-                  <div className="esttotal-container">
-                    <p>Est.total</p>
-                    <p>total price</p>
-                  </div>
-                </div>
-                <button className="checkout-btn">
-                  Checkout
-                  <span>price</span>
-                </button>
-              </article> */}
 
               <article className="order-summary-section">
                 <div className="summary-wrapper">

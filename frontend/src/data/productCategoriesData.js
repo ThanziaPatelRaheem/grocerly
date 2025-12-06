@@ -1,29 +1,16 @@
 const productCategories = [
-  { name: "Fruits", to: "/products/fruits" },
-  { name: "Vegetables", to: "/products/vegetables" },
-  { name: "Dairy & Eggs", to: "/products/dairy-eggs" },
-  { name: "Meat & Poultry", to: "/products/meat-poultry" },
-  { name: "Bakery & Bread", to: "/products/bakery-bread" },
-  { name: "Frozen Foods", to: "/products/frozen-foods" },
-  { name: "Snacks & Candy", to: "/products/snacks-candy" },
-
-  // Updated for better structure and unique 'to' paths:
-  {
-    name: "Household Supplies",
-    to: "/products/household-supplies",
-  },
-  { name: "Mother & Baby", to: "/products/mother-baby" },
-  {
-    name: "Beauty & Personal Care",
-
-    to: "/products/beauty-personal-care",
-  },
-  { name: "Beverages", to: "/products/beverages" },
-  {
-    name: "Cooking & Baking Needs",
-
-    to: "/products/cooking-baking-needs",
-  },
+  { name: "Fruits", slug: "fruits" },
+  { name: "Vegetables", slug: "vegetables" },
+  { name: "Dairy & Eggs", slug: "dairy & eggs" },
+  { name: "Meat & Poultry", slug: "meat & poultry" },
+  { name: "Bakery & Bread", slug: "bakery & bread" },
+  { name: "Frozen Foods", slug: "frozen foods" },
+  { name: "Snacks & Candy", slug: "snacks & candy" },
+  { name: "Household Supplies", slug: "household supplies" },
+  { name: "Mother & Baby", slug: "mother & baby" },
+  { name: "Beauty & Personal Care", slug: "beauty & personal-care" },
+  { name: "Beverages", slug: "beverages" },
+  { name: "Cooking & Baking Needs", slug: "cooking & baking needs" },
 ];
 
 export default productCategories;

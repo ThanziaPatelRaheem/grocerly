@@ -14,7 +14,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { name, email, password } = user;
 
-  const [register, { data, isLoading, isError, error }] = useRegisterMutation();
+  const [register, { data, isLoading, error }] = useRegisterMutation();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
 

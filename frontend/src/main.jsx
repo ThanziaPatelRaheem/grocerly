@@ -4,11 +4,6 @@ import "./index.css";
 import App from "./App.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
-import { makeServer } from "./Mirage/server.js";
-
-if (import.meta.env.DEV) {
-  makeServer({ environment: "development" });
-}
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

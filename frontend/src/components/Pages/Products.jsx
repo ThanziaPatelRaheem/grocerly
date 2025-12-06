@@ -11,7 +11,7 @@ import { useLazyGetProductsQuery } from "../../redux/api/productApi";
 import toast from "react-hot-toast";
 import { useSearchParams } from "react-router-dom";
 import Filters from "../Layout/Filters";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setCartItem } from "../../redux/features/cartSlice";
 
 const Products = () => {
@@ -51,12 +51,17 @@ const Products = () => {
   useEffect(() => {
     if (data?.products) {
       setProducts((prevProducts) => {
-        if (data.currentPage === 1) {
+        if (currentPage === 1) {
           return data.products;
         }
         return [...prevProducts, ...data.products];
       });
-      setTotalPages(data.totalPages || 1);
+
+      const perPage = data.resPerPage ?? 12;
+      const count = data.filteredProductsCount ?? data.totalProducts ?? 0;
+      const total = Math.ceil(count / perPage) || 1;
+
+      setTotalPages(total);
     }
   }, [data]);
 
@@ -112,12 +117,12 @@ const Products = () => {
   const addToCart = (product) => {
     dispatch(
       setCartItem({
-        product: product.id,
+        product: product._id,
         name: product.name,
         price: product.price,
-        image: product.images?.[0],
+        image: product.images?.[0].url,
         stock: product.stock,
-        quantity: 1, // add one by default
+        quantity: 1,
       })
     );
     toast.success("Added to cart");
@@ -155,8 +160,6 @@ const Products = () => {
             </Link>
           )}
           <div className="product-header">
-            {/* <CgShapeCircle className="aside-icon" /> */}
-
             <h1 className="all-products-heading">
               {keyword
                 ? `${data?.products?.length} Search Results for ${keyword}`
@@ -166,7 +169,7 @@ const Products = () => {
           <div className="product-list-grid">
             {products?.map((product) => (
               <ProductCard
-                key={product.id}
+                key={product._id}
                 product={product}
                 addToCart={addToCart}
               />
@@ -184,7 +187,6 @@ const Products = () => {
             </button>
           )}
 
-          {/* 2. Show the "No More Products" message */}
           {!hasMore && currentPage > 1 && products.length > 0 && (
             <p className="no-more-products-message">
               You've reached the end of the catalog.

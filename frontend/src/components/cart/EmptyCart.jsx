@@ -1,10 +1,12 @@
 import React from "react";
 import emptyCart from "../../assets/images/emptyCart.png";
 import { Link } from "react-router-dom";
+import MetaData from "../Layout/MetaData";
 
 const EmptyCart = () => {
   return (
     <>
+      <MetaData title={"Empty Cart"} />
       <section className="empty-cart-section ">
         <div className="empty-wrapper">
           <div className="empty-cart-img-container">

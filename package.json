@@ -1,0 +1,38 @@
+{
+  "name": "grocerly",
+  "version": "1.0.0",
+  "description": "e-commerce application",
+  "homepage": "https://github.com/ThanziaPatelRaheem/grocerly#readme",
+  "bugs": {
+    "url": "https://github.com/ThanziaPatelRaheem/grocerly/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ThanziaPatelRaheem/grocerly.git"
+  },
+  "license": "ISC",
+  "author": "Thanzia Patel Raheem",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node backend/app.js",
+    "dev": "NODE_ENV=DEVELOPMENT nodemon backend/app.js",
+    "prod": "NODE_ENV=PRODUCTION nodemon backend/app.js",
+    "seeder": "node backend/seeder/seeder.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.3",
+    "nodemailer": "^7.0.10",
+    "stripe": "^19.3.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

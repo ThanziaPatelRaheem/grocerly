@@ -9,18 +9,20 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-
   const [login, { isLoading, error }] = useLoginMutation();
   const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error?.data?.message);
+    }
+  }, [error]);
 
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/");
     }
-    if (error) {
-      toast.error(error?.data?.message);
-    }
-  }, [error, isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -67,7 +69,7 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <button className=" btn login-btn" disabled={isLoading}>
-                {isLoading ? "Loging.." : "Login"}
+                {isLoading ? "Logging.." : "Login"}
               </button>
             </form>
           </div>

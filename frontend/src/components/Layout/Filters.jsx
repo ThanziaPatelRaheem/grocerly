@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { PRODUCT_CATEGORIES } from "../../data/productCategories.js";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { getPriceQueryParams } from "../../helpers/helper.js";
 
 const Filters = () => {
   const [min, setMin] = useState("min");
   const [max, setMax] = useState("max");
 
-  const navigate = useNavigate();
   let [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
@@ -18,7 +17,6 @@ const Filters = () => {
   }, [searchParams]);
 
   const selectedCategory = searchParams.get("category");
-  console.log("this is the selected Category ", selectedCategory);
 
   const handleButtonClick = (e) => {
     e.preventDefault();
@@ -28,14 +26,12 @@ const Filters = () => {
 
     setSearchParams(searchCopy, { replace: true });
   };
-  // HANDLE CATEGORY FILTER
 
   const handleCategoryClick = (e) => {
     const { checked, value, name } = e.target;
 
     //make a copy of the current query string
     const updatedSearchParams = new URLSearchParams(searchParams);
-    console.log("this is updatedSearcgParams", updatedSearchParams);
 
     if (checked) updatedSearchParams.set(name, value);
     else updatedSearchParams.delete(name);
@@ -47,7 +43,7 @@ const Filters = () => {
       <div className="filter-header">
         <h2 className="filter-heading">Filter Products</h2>
       </div>
-      {/* filter by price */}
+
       <div className="filter-price">
         <h3 className="price-title">Price</h3>
         <form

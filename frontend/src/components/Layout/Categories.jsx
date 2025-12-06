@@ -1,6 +1,4 @@
 import React from "react";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { RiCloseLargeLine } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 import productCategories from "../../data/productCategoriesData";
 const Categories = ({ menuOpen, menuToggle }) => {
@@ -13,7 +11,7 @@ const Categories = ({ menuOpen, menuToggle }) => {
           {productCategories.map((category) => (
             <li key={category.name}>
               <NavLink
-                to={category.to}
+                to={`/products?category=${encodeURIComponent(category.slug)}`}
                 className="menu-list-item"
                 onClick={menuToggle}
               >

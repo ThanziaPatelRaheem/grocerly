@@ -8,7 +8,7 @@
 }
 .loading-spinner {
   font-size: 3rem;
-  color: #7cb141;
+  color: #59b828;
   animation-name: spin;
   animation-duration: 1.2s;
   animation-timing-function: linear;

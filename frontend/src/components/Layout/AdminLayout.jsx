@@ -7,7 +7,7 @@ import { TbReceipt2 } from "react-icons/tb";
 import { FaUserFriends } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 
-const UserLayout = () => {
+const AdminLayout = () => {
   return (
     <>
       <section className="adminlayout-section  main-grid">
@@ -24,7 +24,7 @@ const UserLayout = () => {
               Dashboard
             </NavLink>
             <NavLink
-              to="product-new"
+              to="product/new"
               className={({ isActive }) =>
                 isActive ? "profile-links pactive" : "profile-links"
               }
@@ -76,4 +76,4 @@ const UserLayout = () => {
   );
 };
 
-export default UserLayout;
+export default AdminLayout;
