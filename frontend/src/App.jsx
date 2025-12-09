@@ -1,8 +1,8 @@
 import React from "react";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import UserRoutes from "./components/routes/userRoutes";
-import AdminRoutes from "./components/routes/adminRoutes";
+import UserRoutes from "./components/routes/UserRoutes";
+import AdminRoutes from "./components/routes/AdminRoutes";
 import AppLayout from "./components/Layout/AppLayout";
 import NotFound from "./components/Layout/NotFound";
 
