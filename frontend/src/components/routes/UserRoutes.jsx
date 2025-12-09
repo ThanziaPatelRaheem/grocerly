@@ -23,7 +23,7 @@ const ProductDetails = lazy(() =>
 );
 const MyOrders = lazy(() => import("../order/MyOrders"));
 const OrderDetails = lazy(() => import("../order/OrderDetails"));
-const Invoice = lazy(() => import("../invoice/invoice"));
+const Invoice = lazy(() => import("../invoice/Invoice"));
 
 const Profile = lazy(() => import("../user/Profile"));
 const UpdateProfile = lazy(() => import("../user/UpdateProfile"));
