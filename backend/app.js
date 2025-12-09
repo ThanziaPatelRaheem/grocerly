@@ -21,8 +21,9 @@ process.on("uncaughtException", (err) => {
   console.log(err.stack);
   process.exit(1);
 });
-
-dotenv.config({ path: "./backend/.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  dotenv.config({ path: "./backend/.env" });
+}
 console.log("Loaded .env, NODE_ENV =", process.env.NODE_ENV);
 connectDB();
 console.log("connectDB called");
@@ -67,13 +68,13 @@ app.use("/api", authRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", paymentRoutes);
 
-if (process.env.NODE_ENV === "PRODUCTION") {
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// if (process.env.NODE_ENV === "PRODUCTION") {
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get(/^(?!\/api).*/, (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
-  });
-}
+//   app.get(/^(?!\/api).*/, (req, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
+//   });
+// }
 app.use(errorMiddleware);
 
 const server = app.listen(PORT, () => {
