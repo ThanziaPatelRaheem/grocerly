@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { useOrderDetailsQuery } from "../../redux/api/orderApi";
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
-import GroLogo from "../../assets/images/GroLogo.png";
+import GroLogo from "../../assets/images/Grocerly.png";
 import { MdKeyboardDoubleArrowLeft } from "react-icons/md";
 
 const Invoice = () => {
