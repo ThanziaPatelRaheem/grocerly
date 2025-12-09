@@ -75,6 +75,10 @@ app.use("/api", paymentRoutes);
 //     res.sendFile(path.join(__dirname, "../frontend/dist", "index.html"));
 //   });
 // }
+
+app.get("/", (req, res) => {
+  res.send("Grocerly API is running. Try /api/products");
+});
 app.use(errorMiddleware);
 
 const server = app.listen(PORT, () => {
