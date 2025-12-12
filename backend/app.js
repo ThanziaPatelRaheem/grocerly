@@ -33,7 +33,7 @@ const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://grocerly-lergwmmaa-thanzias-projects.vercel.app",
+  "https://grocerly-flax.vercel.app",
 ];
 
 app.use(
