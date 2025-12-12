@@ -31,10 +31,10 @@ console.log("connectDB called");
 const app = express();
 const PORT = process.env.PORT || 4000;
 
-const allowedOrigins =
-  process.env.NODE_ENV === "PRODUCTION"
-    ? [process.env.FRONTEND_URL]
-    : ["http://localhost:5173"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://grocerly-lergwmmaa-thanzias-projects.vercel.app",
+];
 
 app.use(
   cors({
