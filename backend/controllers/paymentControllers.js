@@ -17,6 +17,8 @@ export const stripeCheckoutSession = catchAsyncErrors(
     const line_items = body?.orderItems?.map((item) => {
       const imageUrl = isValidStripeImageUrl(item?.image) ? item.image : null;
 
+      const unitAmountInCents = Math.round(Number(item?.price) * 100);
+
       return {
         price_data: {
           currency: "sgd",
@@ -25,7 +27,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
             ...(imageUrl ? { images: [imageUrl] } : {}),
             metadata: { productId: item?.product },
           },
-          unit_amount: item?.price * 100,
+          unit_amount: unitAmountInCents,
         },
         tax_rates: ["txr_1SSrBARo4qJhGUaOSJXHzqO9"],
         quantity: item?.quantity,
@@ -44,7 +46,7 @@ export const stripeCheckoutSession = catchAsyncErrors(
       customer_email: req?.user?.email,
       client_reference_id: req?.user?._id?.toString(),
       mode: "payment",
-      metadata: { ...shippingInfo, itemsPrice: body?.itemsPrice },
+      metadata: { ...shippingInfo, itemsPrice: String(body?.itemsPrice ?? 0) },
       shipping_options: [
         {
           shipping_rate,
@@ -103,7 +105,7 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       const totalAmount = session.amount_total / 100;
       const taxAmount = session.total_details.amount_tax / 100;
       const shippingAmount = session.total_details.amount_shipping / 100;
-      const itemsPrice = session.metadata.itemsPrice;
+      const itemsPrice = Number(session.metadata.itemsPrice);
 
       const shippingInfo = {
         address: session.metadata.address,
