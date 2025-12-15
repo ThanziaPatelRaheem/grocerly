@@ -14,7 +14,8 @@ const Register = () => {
   const navigate = useNavigate();
   const { name, email, password } = user;
 
-  const [register, { data, isLoading, error }] = useRegisterMutation();
+  const [register, { data, isLoading, error, isSuccess }] =
+    useRegisterMutation();
 
   const { isAuthenticated } = useSelector((state) => state.auth);
 
@@ -25,17 +26,15 @@ const Register = () => {
   }, [isAuthenticated, navigate]);
 
   useEffect(() => {
+    if (isSuccess && data?.token) {
+      toast.success("Account created successfully. Please log in.");
+      navigate("/login");
+    }
+
     if (error) {
       toast.error(error?.data?.message || "Registration failed");
     }
-  }, [error]);
-
-  useEffect(() => {
-    if (data) {
-      toast.success("Registered successfully! Please log in.");
-      navigate("/login");
-    }
-  }, [data, navigate]);
+  }, [isSuccess, data, error, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
