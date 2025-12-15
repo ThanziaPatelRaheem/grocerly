@@ -3,6 +3,8 @@ import Stripe from "stripe";
 import Order from "../models/order.js";
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
+const FRONTEND_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+
 //Create stripe checkout session => /api/payment/checkout-session
 export const stripeCheckoutSession = catchAsyncErrors(
   async (req, res, next) => {
@@ -41,8 +43,8 @@ export const stripeCheckoutSession = catchAsyncErrors(
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],
-      success_url: `${process.env.FRONTEND_URL}/me/orders?order_success=true`,
-      cancel_url: `${process.env.FRONTEND_URL}`,
+      success_url: `${FRONTEND_URL}/me/orders?order_success=true`,
+      cancel_url: `${FRONTEND_URL}`,
       customer_email: req?.user?.email,
       client_reference_id: req?.user?._id?.toString(),
       mode: "payment",
@@ -133,10 +135,11 @@ export const stripeWebhook = catchAsyncErrors(async (req, res, next) => {
       };
 
       await Order.create(orderData);
-      res.status(200).json({
+      return res.status(200).json({
         success: true,
       });
     }
+    return res.status(200).json({ received: true });
   } catch (error) {
     console.error("Error =>", error);
     throw error;
