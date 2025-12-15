@@ -22,10 +22,20 @@ const Register = () => {
     if (isAuthenticated) {
       navigate("/");
     }
+  }, [isAuthenticated, navigate]);
+
+  useEffect(() => {
     if (error) {
-      toast.error(error?.data?.message);
+      toast.error(error?.data?.message || "Registration failed");
     }
-  }, [error, isAuthenticated]);
+  }, [error]);
+
+  useEffect(() => {
+    if (data) {
+      toast.success("Registered successfully! Please log in.");
+      navigate("/login");
+    }
+  }, [data, navigate]);
 
   const submitHandler = (e) => {
     e.preventDefault();
